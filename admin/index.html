@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<title>Orders · Ribbon &amp; Rhyme admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="admin.css">
+<link rel="icon" href="../assets/mark.svg">
+</head>
+<body class="admin">
+<header class="top">
+  <a class="brand" href="../"><img src="../assets/mark.svg" alt="" width="30" height="30">Ribbon &amp; Rhyme <span class="tagline">Operations</span></a>
+  <div class="top-r"><span id="live" class="live">●</span><span id="updated"></span><button class="btn ghost small" id="logout">Lock</button></div>
+</header>
+
+<section id="login" class="wrap" style="padding-top:60px">
+  <div class="card">
+    <h2 style="font:600 26px var(--serif);margin:0 0 6px">Team dashboard</h2>
+    <p style="color:var(--ink-2);margin:0 0 16px">Orders, generation status, failures and API spend. Enter the access key.</p>
+    <form id="loginForm"><input class="input" id="key" type="password" autocomplete="current-password" placeholder="Access key">
+    <button class="btn block" style="margin-top:12px">Open dashboard</button></form>
+    <p class="err" id="loginErr"></p>
+  </div>
+</section>
+
+<main id="app" class="wide hidden">
+  <div class="kpis" id="kpis"></div>
+  <div class="grid2">
+    <section class="panel">
+      <div class="panel-h"><h3>Orders</h3>
+        <div class="filters" id="filters"></div></div>
+      <div class="table-wrap"><table class="orders"><thead><tr>
+        <th>Song</th><th>For</th><th>Status</th><th>Order</th><th>Created</th><th class="num">Cost</th></tr></thead>
+        <tbody id="rows"></tbody></table></div>
+    </section>
+    <aside>
+      <section class="panel"><div class="panel-h"><h3>Needs attention</h3></div><ul class="alerts" id="alerts"></ul></section>
+      <section class="panel"><div class="panel-h"><h3>API spend · 30 days</h3></div><table class="usage" id="usage"></table></section>
+      <section class="panel"><div class="panel-h"><h3>Safeguards</h3></div><div id="guards" class="guards"></div></section>
+    </aside>
+  </div>
+</main>
+
+<div id="drawer" class="drawer hidden" role="dialog" aria-modal="true">
+  <div class="drawer-bg" data-close></div>
+  <div class="drawer-p">
+    <button class="x" data-close aria-label="Close">×</button>
+    <div id="detail"></div>
+  </div>
+</div>
+<script src="../assets/config.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+# Only the public demo is published.
+/*
+!/.gitignore
+!/.nojekyll
+!/index.html
+!/song.html
+!/how-it-works.html
+!/assets/
+!/admin/
+!/media/
+/media/*
+!/media/sample-maya-a.mp3
+!/media/sample-maya-a.jpg

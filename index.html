@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Ribbon &amp; Rhyme · A song written about them</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="icon" href="assets/mark.svg">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="./"><img src="assets/mark.svg" alt="" width="30" height="30">Ribbon &amp; Rhyme</a>
+  <span class="demo-pill" title="Fictional brand. Checkout runs on a Shopify development store with test payments only.">Demo · test payments</span>
+</header>
+
+<main>
+  <!-- landing -->
+  <section id="landing" class="wrap hero">
+    <h1>Their story,<br><em>sung.</em></h1>
+    <p>Answer a few questions about someone you love. We write the lyrics, you polish them, and a finished song lands in your inbox minutes after checkout.</p>
+    <button class="btn coral" id="start">Start their song</button>
+    <div class="meta"><span>Lyrics you can edit</span><span>Two versions</span><span>Ready in minutes</span></div>
+    <div id="resume" class="banner hidden"></div>
+    <div class="card sample">
+      <div class="player">
+        <img src="media/sample-maya-a.jpg" alt="">
+        <div><div class="v">Real example · made by this demo</div><h3>“I'd Still Choose You”</h3>
+          <div class="muted-s">For Maya, from Sam · 10th anniversary · acoustic pop</div>
+          <audio controls preload="none" src="media/sample-maya-a.mp3"></audio></div>
+      </div>
+      <details class="sample-story"><summary>What Sam told us</summary>
+        <p>“She sings in the car with the windows down, keeps every ticket stub in a shoebox… We got lost on the way to Big Sur, ran out of gas near a lighthouse, and ended up at a taco truck… She calls me Captain because I insisted I didn't need the map. Our dog is Biscuit.”</p>
+      </details>
+    </div>
+    <ol class="how">
+      <li><b>Tell us about them</b><span>Six quick questions: names, memories, the sound you want.</span></li>
+      <li><b>Shape the lyrics</b><span>AI drafts them in under a minute. Edit any line, or ask for a rewrite.</span></li>
+      <li><b>Get the song</b><span>Pay securely, and two produced versions arrive by email minutes later.</span></li>
+    </ol>
+  </section>
+
+  <!-- quiz -->
+  <section id="quiz" class="wrap quiz hidden">
+    <div class="progress"><div class="bar"><i id="bar"></i></div><span class="lbl" id="steplbl"></span></div>
+    <form id="form" autocomplete="on" novalidate></form>
+    <p class="err" id="err" role="alert"></p>
+  </section>
+
+  <!-- writing -->
+  <section id="writing" class="wrap writing hidden" aria-live="polite">
+    <div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <h2 id="writingTitle">Writing your lyrics…</h2>
+    <p id="writingLine">Reading your story</p>
+  </section>
+
+  <!-- review -->
+  <section id="review" class="wrap quiz hidden">
+    <div class="progress"><div class="bar"><i style="width:92%"></i></div><span class="lbl">Review your lyrics</span></div>
+    <div class="card">
+      <input id="songTitle" class="title-input" maxlength="80" aria-label="Song title">
+      <div class="sound"><span>🎵</span><div><b>Sound:</b> <span id="soundText"></span></div></div>
+      <div class="edited-note" id="editedNote"></div>
+      <div id="sections"></div>
+      <details class="rewrite" id="rewriteBox">
+        <summary>Want the AI to take another pass? <span id="rewritesLeft"></span></summary>
+        <div class="field" style="margin-top:12px">
+          <textarea class="textarea" id="rewriteNote" maxlength="400" placeholder="e.g. Make the chorus about our road trip to Big Sur, and keep it more playful."></textarea>
+        </div>
+        <button type="button" class="btn ghost small" id="rewriteBtn">Rewrite the lyrics</button>
+      </details>
+    </div>
+    <div class="card price">
+      <div style="display:flex;justify-content:space-between;align-items:baseline"><span class="amt">$39</span><span style="color:var(--ink-3);font-size:14px">one-time</span></div>
+      <ul>
+        <li>Your approved lyrics, sung and produced</li>
+        <li>Two different versions to choose from</li>
+        <li>Private listening page + MP3 downloads</li>
+        <li>Usually ready about 5 minutes after payment</li>
+      </ul>
+    </div>
+    <p class="err" id="reviewErr" role="alert"></p>
+    <p class="lock-note">Lyrics are locked once you pay. Checkout is handled securely by Shopify.</p>
+    <div class="actions"><div class="wrap">
+      <button type="button" class="btn ghost" id="reviewBack">Edit answers</button>
+      <button type="button" class="btn coral" id="checkoutBtn">Approve &amp; checkout</button>
+    </div></div>
+  </section>
+</main>
+
+<p class="foot" id="foot"><a href="how-it-works.html">How this demo works</a> · <a href="admin/">Team dashboard</a><br>Ribbon &amp; Rhyme is a fictional brand. Checkout uses a Shopify development store with test payments.</p>
+<script src="assets/config.js"></script>
+<script src="assets/quiz.js"></script>
+</body>
+</html>

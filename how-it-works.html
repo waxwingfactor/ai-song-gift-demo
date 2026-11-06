@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>How it works · Personalized song automation demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="icon" href="assets/mark.svg">
+<style>
+  .doc { max-width: 900px; margin: 0 auto; padding: 0 20px 80px; }
+  .doc h1 { font: 600 clamp(32px, 6vw, 46px)/1.08 var(--serif); letter-spacing: -.02em; margin: 18px 0 10px; }
+  .doc h2 { font: 600 26px/1.2 var(--serif); margin: 44px 0 12px; }
+  .doc p, .doc li { color: var(--ink-2); }
+  .lead { font-size: 18px; }
+  .flow { display: grid; gap: 10px; margin: 20px 0; }
+  .lane { display: grid; grid-template-columns: 130px 1fr; gap: 12px; align-items: stretch; }
+  .lane .who { font-size: 12px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-3); padding-top: 14px; }
+  .steps { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .box { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; font-size: 14px; line-height: 1.35; flex: 1 1 150px; }
+  .box b { display: block; color: var(--ink); font-size: 14px; }
+  .box small { color: var(--ink-3); }
+  .box.n8n { border-left: 4px solid #ea4b71; } .box.sb { border-left: 4px solid #3ecf8e; } .box.shop { border-left: 4px solid #95bf47; }
+  .box.kie { border-left: 4px solid var(--gold); } .box.cust { border-left: 4px solid var(--coral); }
+  .arrow { color: var(--ink-3); font-size: 18px; }
+  @media (max-width: 640px) { .lane { grid-template-columns: 1fr; } .lane .who { padding-top: 6px; } .arrow { display: none; } }
+  table.t { border-collapse: collapse; width: 100%; font-size: 14px; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  table.t th, table.t td { padding: 10px 12px; border-bottom: 1px solid #f1e9df; text-align: left; vertical-align: top; }
+  table.t th { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-3); background: #fbf7f1; }
+  table.t td.n, table.t th.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  table.t tr.total td { font-weight: 700; color: var(--ink); background: #fbf7f1; }
+  .scroll { overflow-x: auto; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+  .g { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 14px; font-size: 14px; }
+  .g b { color: var(--ink); display: block; margin-bottom: 4px; }
+  .note { font-size: 13px; color: var(--ink-3); }
+  .stat { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 16px 0; }
+  .stat div { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+  .stat b { display: block; font: 600 24px/1.2 var(--serif); color: var(--ink); }
+  .stat span { font-size: 13px; color: var(--ink-3); }
+  code { font: 13px ui-monospace, Menlo, monospace; background: #f3ece3; padding: 1px 5px; border-radius: 5px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="./"><img src="assets/mark.svg" alt="" width="30" height="30">Ribbon &amp; Rhyme</a>
+  <a class="demo-pill" href="./" style="text-decoration:none">Try the demo →</a>
+</header>
+<main class="doc">
+  <h1>How the song automation works</h1>
+  <p class="lead">A working demo of the personalized-song workflow: quiz → AI lyrics → customer edits → Shopify payment → Kie.ai music → private storage → email delivery, with an operations dashboard. Ribbon &amp; Rhyme is a fictional brand; checkout runs on a Shopify development store with test payments.</p>
+
+  <div class="stat">
+    <div><b>~35 s</b><span>quiz to editable lyrics</span></div>
+    <div><b>~45 s</b><span>payment to song in the inbox (measured)</span></div>
+    <div><b>2</b><span>full-length versions per order</span></div>
+    <div><b>$0.06</b><span>Kie.ai music cost per order (12 credits)</span></div>
+  </div>
+
+  <h2>Architecture</h2>
+  <p>Existing platforms only. No servers to maintain: <b>n8n</b> runs the workflow, <b>Supabase</b> keeps the order state and the audio, <b>Shopify</b> takes the money, <b>Kie.ai</b> writes the lyrics (Claude) and the music (Suno V6).</p>
+  <div class="flow">
+    <div class="lane"><div class="who">Customer</div><div class="steps">
+      <div class="box cust"><b>Mobile quiz</b><small>6 short steps; any static host or a Shopify page</small></div><span class="arrow">→</span>
+      <div class="box cust"><b>Review &amp; edit lyrics</b><small>edit any line, or ask for a rewrite (2 included)</small></div><span class="arrow">→</span>
+      <div class="box shop"><b>Shopify checkout</b><small>song reference rides along as a cart attribute</small></div></div></div>
+    <div class="lane"><div class="who">Lyrics</div><div class="steps">
+      <div class="box n8n"><b>n8n · song API</b><small>validates input, rate limits, builds the prompt</small></div><span class="arrow">→</span>
+      <div class="box kie"><b>Claude via Kie.ai</b><small>structured output: lyrics, title, style, vocal, sung name</small></div><span class="arrow">→</span>
+      <div class="box sb"><b>Supabase</b><small>draft saved; approved lyrics frozen at payment</small></div></div></div>
+    <div class="lane"><div class="who">After payment</div><div class="steps">
+      <div class="box shop"><b>“Order payment” webhook</b><small>HMAC-verified in n8n</small></div><span class="arrow">→</span>
+      <div class="box sb"><b>Claim the order</b><small>one atomic database step; duplicates stop here</small></div><span class="arrow">→</span>
+      <div class="box kie"><b>Kie.ai Suno V6</b><small>custom lyrics + musical direction; callback URL</small></div></div></div>
+    <div class="lane"><div class="who">Delivery</div><div class="steps">
+      <div class="box n8n"><b>Callback / watchdog</b><small>re-reads the task from Kie.ai's API; 8 + 12 min fallback</small></div><span class="arrow">→</span>
+      <div class="box sb"><b>Private storage</b><small>MP3s + cover art copied off Kie.ai (its links expire in 14 days)</small></div><span class="arrow">→</span>
+      <div class="box cust"><b>Email + private page</b><small>player, downloads, lyrics; 24 h signed links</small></div></div></div>
+  </div>
+
+  <h2>Safeguards against duplicates and wasted spend</h2>
+  <div class="grid">
+    <div class="g"><b>Pay first, generate second</b>Nothing is sent to Kie.ai until Shopify confirms payment. Abandoned carts cost one lyrics draft (~$0.03), never a song.</div>
+    <div class="g"><b>One payment, one song</b>A row lock plus unique keys on the Shopify order ID and the Kie.ai task ID. Shopify's retries, double clicks and replayed webhooks are logged and ignored.</div>
+    <div class="g"><b>Second payment for the same song</b>Flagged for a refund in the dashboard and emailed to the team; never generated twice.</div>
+    <div class="g"><b>Signed webhooks</b>Shopify deliveries are checked with HMAC-SHA256 over the raw body. Kie.ai callbacks aren't trusted at all: the result is re-read from Kie.ai's API before anything is stored.</div>
+    <div class="g"><b>Spend caps</b>Lyrics: 3 drafts per song, 8 songs per visitor per day, 30 drafts an hour in total. Music: a daily generation cap parks extra orders for one-click approval.</div>
+    <div class="g"><b>Amount check</b>An order that paid less than the price (discount abuse, wrong product) is held for review instead of generated.</div>
+    <div class="g"><b>No stuck orders</b>If a callback never arrives, the watchdog checks Kie.ai at 8 and 20 minutes and finishes or fails the order. Max 3 attempts per order.</div>
+    <div class="g"><b>Alerts</b>Any failed step, crashed workflow, held or suspicious order emails the team with a link to the execution.</div>
+  </div>
+
+  <h2>Admin visibility</h2>
+  <p>The team dashboard (access key) shows every order with its status, a step-by-step timeline (quiz → draft → approved → paid → sent to Kie.ai → stored → emailed), the exact lyrics and musical direction sent, the customer's quiz answers, what each order cost, alerts, and API spend by service. Buttons: retry generation, check Kie.ai now, resend email, cancel. n8n's own execution log keeps every run for deeper debugging.</p>
+
+  <h2>Operating costs</h2>
+  <p>Measured in this demo: lyrics draft (Claude Opus 5.5 via Kie.ai) <b>$0.03</b>; song with two versions (Suno V6 via Kie.ai) <b>12 credits = $0.06</b>; files <b>~7.5 MB</b> per order. Prices checked November 5, 2026.</p>
+  <div class="scroll"><table class="t">
+    <thead><tr><th>Per sold song</th><th class="n">Cost</th><th>Assumption</th></tr></thead>
+    <tbody>
+      <tr><td>Music (Kie.ai Suno V6, 2 versions)</td><td class="n">$0.060</td><td>12 credits × $0.005; failed tasks are not charged</td></tr>
+      <tr><td>Lyrics (Claude via Kie.ai)</td><td class="n">$0.11</td><td>$0.03 per draft; 1.3 drafts per quiz and 35% of lyric viewers buying → ~3.7 drafts per sale</td></tr>
+      <tr><td>Storage, delivery, email</td><td class="n">&lt; $0.01</td><td>7.5 MB stored, ~40 MB streamed/downloaded</td></tr>
+      <tr class="total"><td>AI + infrastructure per song</td><td class="n">≈ $0.17</td><td>about 0.5% of a $39 sale</td></tr>
+      <tr><td>Card processing (Shopify Payments, Basic)</td><td class="n">$1.43</td><td>2.9% + 30¢ on $39; not an automation cost, shown for scale</td></tr>
+    </tbody></table></div>
+  <div class="scroll" style="margin-top:14px"><table class="t">
+    <thead><tr><th>Monthly</th><th class="n">100 songs</th><th class="n">1,000 songs</th><th class="n">10,000 songs</th></tr></thead>
+    <tbody>
+      <tr><td>Kie.ai music + lyrics</td><td class="n">$17</td><td class="n">$170</td><td class="n">$1,700</td></tr>
+      <tr><td>n8n</td><td class="n">€20 Cloud Starter</td><td class="n">$10–20 self-hosted*</td><td class="n">$20–40 self-hosted*</td></tr>
+      <tr><td>Supabase (database + audio)</td><td class="n">$25 Pro</td><td class="n">$25 Pro</td><td class="n">$25 + ~$5–30 growth**</td></tr>
+      <tr><td>Transactional email</td><td class="n">$0 (Resend free)</td><td class="n">$0–20</td><td class="n">$20 (Resend Pro)</td></tr>
+      <tr class="total"><td>Total, excluding Shopify</td><td class="n">≈ $65</td><td class="n">≈ $210–235</td><td class="n">≈ $1,770–1,790</td></tr>
+      <tr><td>Shopify plan (likely already paid)</td><td class="n">$39 Basic</td><td class="n">$39 Basic</td><td class="n">$39+</td></tr>
+    </tbody></table></div>
+  <p class="note">* n8n Cloud Starter includes 2,500 executions and Pro 10,000; this flow uses ~11 per sold song (including abandoned drafts), so from about 800 songs a month a self-hosted n8n (free Community edition on a small VPS) is cheaper than Cloud. VPS prices are estimates. ** Audio grows ~75 GB a month at 10,000 songs; past Supabase Pro's 100 GB it costs $0.021/GB-month, or move audio to Cloudflare R2 ($0.015/GB-month, free egress), or delete files after 12 months. Kie.ai gives up to 10% bonus credits on large top-ups.</p>
+
+  <h2>What gets handed over</h2>
+  <ul>
+    <li>9 importable n8n workflows: song API, Shopify orders, Kie.ai callback, submit/finish/email/alert sub-workflows, admin actions, error alerts.</li>
+    <li>One Supabase SQL file: tables, state-change functions, permissions, private bucket.</li>
+    <li>The quiz, song page and dashboard (plain HTML/JS, no build step); can also live inside a Shopify theme page.</li>
+    <li>Setup guide (accounts, keys, webhook, test checkout), runbook for failures and refunds, and a cost sheet.</li>
+  </ul>
+  <p class="note">Ribbon &amp; Rhyme is fictional and not affiliated with any song-gift company. Songs in this demo are generated by AI.</p>
+</main>
+</body>
+</html>

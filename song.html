@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<title>Your song · Ribbon &amp; Rhyme</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="icon" href="assets/mark.svg">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="./"><img src="assets/mark.svg" alt="" width="30" height="30">Ribbon &amp; Rhyme</a>
+  <span class="demo-pill">Private link</span>
+</header>
+<main class="wrap" style="padding-bottom:40px">
+  <section id="loading" class="writing"><div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><p>Loading your song…</p></section>
+
+  <section id="missing" class="hero hidden">
+    <h1 style="font-size:36px">We couldn't find that song.</h1>
+    <p>Check that you opened the full link from your email.</p>
+  </section>
+
+  <section id="progress" class="hidden">
+    <div class="hero" style="padding-bottom:0">
+      <h1 style="font-size:clamp(32px,8vw,48px)" id="pTitle"></h1>
+      <p id="pSub"></p>
+    </div>
+    <div class="card">
+      <ol class="status-steps" id="steps"></ol>
+      <p style="color:var(--ink-3);font-size:14px;margin:0">You can close this page. We'll email you the moment it's ready.</p>
+    </div>
+  </section>
+
+  <section id="ready" class="hidden">
+    <div class="hero" style="padding-bottom:6px">
+      <p style="margin:0 0 6px;color:var(--coral);font-weight:600" id="rFor"></p>
+      <h1 style="font-size:clamp(34px,8.5vw,54px)" id="rTitle"></h1>
+    </div>
+    <div id="players" style="display:grid;gap:14px"></div>
+    <div class="card" style="margin-top:14px">
+      <h3 style="font:600 20px var(--serif);margin:0 0 4px">Lyrics</h3>
+      <div class="lyrics-view" id="lyrics"></div>
+    </div>
+  </section>
+
+  <section id="failed" class="hero hidden">
+    <h1 style="font-size:36px">We hit a snag recording this one.</h1>
+    <p>Our team has been alerted and will re-record it or refund you. No action is needed from you.</p>
+  </section>
+</main>
+<p class="foot">Ribbon &amp; Rhyme is a fictional brand built to demonstrate an automated song-gift workflow.</p>
+<script src="assets/config.js"></script>
+<script src="assets/song.js"></script>
+</body>
+</html>
